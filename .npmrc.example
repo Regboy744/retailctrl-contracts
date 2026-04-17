@@ -1,0 +1,9 @@
+# Template for consumer repos (backend, frontend).
+# Copy to `.npmrc` in each consumer repo root and keep it out of git
+# (already listed in .gitignore patterns by default).
+#
+# Required to resolve @regboy/retailctrl-contracts from GitHub Packages.
+# Also required in CI — set GITHUB_TOKEN as a secret with read:packages.
+
+@regboy:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
