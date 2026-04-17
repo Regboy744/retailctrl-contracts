@@ -93,6 +93,12 @@ export const SummaryCountsSchema = z.object({
   total_items_submitted: z.number(),
   products_found: z.number(),
   products_not_found: z.array(z.string()),
+  /**
+   * Article codes found in master_products but with no supplier_products row
+   * (no supplier sells the item). Distinct from products_not_found, which
+   * means the article is missing from the catalog entirely.
+   */
+  products_unpriced: z.array(z.string()),
   suppliers_compared: z.number(),
 });
 
