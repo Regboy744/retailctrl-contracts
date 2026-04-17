@@ -40,6 +40,12 @@ jobs:
             exit 1
           fi
 
-      - run: pnpm publish --no-git-checks --access restricted
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Configure npm auth for GitHub Packages
+        run: |
+          cat > .npmrc <<EOF
+          @regboy744:registry=https://npm.pkg.github.com
+          //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+          always-auth=true
+          EOF
+
+      - run: pnpm publish --no-git-checks
