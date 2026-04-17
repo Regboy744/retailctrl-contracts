@@ -1,4 +1,4 @@
-# @regboy/retailctrl-contracts
+# @regboy744/retailctrl-contracts
 
 Shared API contracts (Zod schemas + inferred TypeScript types) for the
 RetailCtrl services. Backend and frontend both depend on this package so
@@ -50,23 +50,23 @@ First-time setup:
 ### Consumer setup after first publish
 
 Swap the `file:` dep for the registry version. Both consumers need an
-`.npmrc` pointing GitHub Packages at the `@regboy` scope:
+`.npmrc` pointing GitHub Packages at the `@regboy744` scope:
 
 ```
 # .npmrc (in each consumer repo — gitignore'd)
-@regboy:registry=https://npm.pkg.github.com
+@regboy744:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
 Set `GITHUB_TOKEN` to a Personal Access Token (classic) with
-`read:packages` scope. `pnpm install` then resolves `@regboy/retailctrl-contracts`
+`read:packages` scope. `pnpm install` then resolves `@regboy744/retailctrl-contracts`
 from GitHub Packages.
 
 Update consumer `package.json`:
 
 ```diff
-- "@regboy/retailctrl-contracts": "file:../retailctrl-contracts",
-+ "@regboy/retailctrl-contracts": "^0.1.0",
+- "@regboy744/retailctrl-contracts": "file:../retailctrl-contracts",
++ "@regboy744/retailctrl-contracts": "^0.1.0",
 ```
 
 ### Releasing a new version

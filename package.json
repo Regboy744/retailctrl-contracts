@@ -1,5 +1,5 @@
 {
-  "name": "@regboy/retailctrl-contracts",
+  "name": "@regboy744/retailctrl-contracts",
   "version": "0.1.0",
   "description": "Shared API contracts (Zod schemas + inferred types) for RetailCtrl services.",
   "type": "module",
