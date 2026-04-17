@@ -20,10 +20,12 @@ import {
   SummaryCountsSchema,
   SummaryEvaluationResultsSchema,
   SummaryOrderTotalsSchema,
+  SupplierConstraintSchema,
   SupplierPriceSchema,
   SupplierRankingSchema,
   SupplierSchema,
   UploadAndCompareResponseSchema,
+  ValidationWarningSchema,
 } from './schemas.js';
 
 export * from './schemas.js';
@@ -44,3 +46,5 @@ export type PriceCheckRequest = z.infer<typeof PriceCheckRequestSchema>;
 export type PriceCheckResponse = z.infer<typeof PriceCheckResponseSchema>;
 export type ParseResult = z.infer<typeof ParseResultSchema>;
 export type UploadAndCompareResponse = z.infer<typeof UploadAndCompareResponseSchema>;
+export type SupplierConstraint = z.infer<typeof SupplierConstraintSchema>;
+export type ValidationWarning = z.infer<typeof ValidationWarningSchema>;

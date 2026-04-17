@@ -141,6 +141,19 @@ export const PriceCheckRequestSchema = z.object({
   include_unavailable: z.boolean().default(false),
 });
 
+/**
+ * Declarative per-supplier ordering constraints. Backend derives these
+ * from each supplier's order-handler config; the frontend uses them to
+ * render pre-flight UX warnings ("this supplier needs an internal
+ * product id"). New constraints are added here as rules appear.
+ */
+export const SupplierConstraintSchema = z.object({
+  /** Supplier needs `internal_product_id` on every submitted item (Savage & Whitten). */
+  requires_internal_product_id: z.boolean(),
+  /** Max items the supplier's basket endpoint accepts in one request. */
+  max_items_per_request: z.number().int().positive().optional(),
+});
+
 export const PriceCheckResponseSchema = z.object({
   data_category: z.literal('price_comparison'),
   description: z.string(),
@@ -149,6 +162,8 @@ export const PriceCheckResponseSchema = z.object({
     z.object({ supplier_name: z.string(), percentage: z.number() })
   ),
   suppliers: z.array(SupplierSchema),
+  /** supplier_id → ordering-side constraints the UI should enforce. */
+  supplier_constraints: z.record(z.string(), SupplierConstraintSchema),
   products: z.array(ProductComparisonSchema),
   summary: PriceCheckSummarySchema,
 });
@@ -170,4 +185,23 @@ export const UploadAndCompareResponseSchema = z.object({
     parse_result: ParseResultSchema,
     comparison: PriceCheckResponseSchema.nullable(),
   }),
+});
+
+// ─── Validation warnings ─────────────────────────────────────────────────────
+
+/**
+ * A soft pre-flight warning surfaced when submitting an order. Always
+ * advisory today; a future phase may promote specific `severity: 'error'`
+ * codes to hard rejection at `/orders/submit`.
+ *
+ * `code` is machine-readable (stable across UI copy changes); `message`
+ * is the current human-readable phrasing.
+ */
+export const ValidationWarningSchema = z.object({
+  code: z.string(),
+  severity: z.enum(['info', 'warning', 'error']),
+  message: z.string(),
+  supplier_id: z.string().optional(),
+  /** Count of offending items (when the rule is quantitative). */
+  item_count: z.number().int().nonnegative().optional(),
 });
