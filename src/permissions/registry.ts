@@ -45,8 +45,13 @@ export const PERMISSIONS = {
 
   'locations:read':               { roles: ['master', 'admin', 'manager'] },
   'locations:create':             { roles: ['master'] },
+  'locations:update':             { roles: ['master'] },
   'locations:delete':             { roles: ['master'] },
   'locations:update:address':     { roles: ['master', 'admin'] },
+
+  'addresses:read':               { roles: ['master', 'admin', 'manager'] },
+  'addresses:write':              { roles: ['master', 'admin'] },
+  'addresses:delete':             { roles: ['master', 'admin'] },
 
   'user_profiles:read':           { roles: ['master', 'admin'] },
   'user_profiles:write':          { roles: ['master'] },
